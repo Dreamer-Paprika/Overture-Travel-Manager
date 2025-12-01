@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Sansita+Swashed:wght@300..900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sacramento&family=Titan+One&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="./style.css">
-    <title>Pet2place</title>
+    <title>Overture Travel Manager</title>
     <style>
      .hide {
     display: none; 
@@ -20,49 +20,171 @@
       <div class="title-area">
       <div class= "logo-area">
         <spam class="image-wrapper">
-      <img class="logo-image" src="./images/placesImage.png"/>
+      <img class="logo-image" src="./images/coconut tree.png"/>
       </spam>
-      <p class="title">Pet2Place</p>
+      <p class="title">Overture Travel Manager</p>
       </div>
       </div>
+
 
       <div class="intro-area" >
-        <i>Discover places located in your pets country of origin, and also discover a collection of captivating images with your API Key <a href="#myAPI">"HERE"</a></i>
+        <i>Discover amazing places to visit on your trip — whether you're looking for accommodation, sightseeing spots, or unique local experiences, we've got you covered. Check out our top five special hand picked tourists 
+          destinations for all seven continents <a href="#myAPI">"HERE"</a>.</i>
       </div>
 
-      <div class="pet-area">
-
-        <div class="pet-selection-area" id="breedSelection">
-        <div class="cat-area">
-          <img class="cat-image" src="./images/catImage.png"/>
-        <p class="cat-area-label">Select a Cat breed</p>
-    <select class="cat-breed-select"></select>
-    </div>
-
+     <div class="navArea">
+      <span class="navCover">
+         <img
+          src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+          alt="Sun"
+          width="100"
+          class="sunAnimation"
+        />
     <nav>
       <ul class="nav-list">
-        <li><a href="#petInfo" class="nav-item">Pet Info</a></li>
+        <li><a href="#selectors" class="nav-item">Selectors</a></li>
         <li><a href="#placeInfo" class="nav-item">Place Info</a></li>
         <li><a href="#myAPI" class="nav-item">API Info</a></li>
       </ul>
     </nav>
+     <img
+          src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+          alt="Sun"
+          width="100"
+          class="sunAnimation"
+        />
+    </span>
+      </div>
 
-    <div class="dog-area">
-         <img class="dog-image" src="./images/dogImage.png"/>
-      <p class="dog-area-label">Select a Dog breed</p>
-    <select class="dog-breed-select"></select>
-    </div>
+      <div style="display: flex; align-items: center; justify-content: space-between;" id="selectors">
+        <div class="category-container">
+          <p class="place-select-label">Select a Place Category</p>
+        <div class="category">
+          <img src="./images/Accomodation.png"class="category-image"/>
+          <select class="accomodation-select"></select>
         </div>
 
-        <div class="pet-info" id="petInfo">
-          
-          <div class="pet-details">
-           <p class="pet-info-title">Pet Info</p>
-           <div class="pet-bio">
-            <a href="#breedSelection" class="pet-bio-link">Select a Pet Breed</a>
-           </div>
-          </div>
+      <div class="category">
+          <img src="./images/Active Life.png"class="category-image"/>
+          <select class="activeLife-select"></select>
         </div>
+
+      <div class="category">
+          <img src="./images/Arts and Entertainment.png"class="category-image"/>
+          <select class="artsAndEntertainment-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Attractions and Activities.png"class="category-image"/>
+          <select class="attractionsAndActivities-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Automotive.png"class="category-imager"/>
+          <select class="automotive-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Beauty and Spa.png"class="category-image"/>
+          <select class="beautyAndSpa-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Business to Business.png"class="category-image"/>
+          <select class="businessToBusiness-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Eat and Drink.png"class="category-image"/>
+          <select class="eatAndDrink-select"></select>
+        </div>
+
+        
+      <div class="category">
+          <img src="./images/Education.png"class="category-image"/>
+          <select class="education-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Financial Service.png"class="category-image"/>
+          <select class="financialService-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Health and Medical.png"class="category-image"/>
+          <select class="healthAndMedical-select"></select>
+        </div>
+
+        </div>
+        <div class="middle-area">
+          <div class="country-category">
+            <p class="place-select-label">Select a Country</p>
+          <img src="./images/Countries.png"class="country-image"/>
+          <select class="country-select"></select>
+        </div>
+      <div class="intro-image-area">
+        <img class="intro-image" src="./images/someone-coding-a-geo-app.png" alt="someone-coding-a-geo-app"/>
+      </div>
+      </div>
+       <div class="category-container">
+         <p class="place-select-label">Select a Place Category</p>
+    <div class="category">
+          <img src="./images/Home Service.png"class="category-image"/>
+          <select class="homeService-select"></select>
+        </div>
+
+         <div class="category">
+          <img src="./images/Mass Media.png"class="category-image"/>
+          <select class="massMedia-select"></select>
+        </div>
+
+         <div class="category">
+          <img src="./images/Pets.png"class="category-image"/>
+          <select class="pet-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Private Establishments and Corporations.png"class="category-image"/>
+          <select class="privateCorporations-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Professional Service.png"class="category-imager"/>
+          <select class="professionalServices-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Public Service and Government Services.png"class="category-imager"/>
+          <select class="publicServiceAndGovernment-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Real Estate.png"class="category-imager"/>
+          <select class="realEstate-select"></select>
+        </div>
+
+        <div class="category">
+          <img src="./images/Religious Organization.png"class="category-imager"/>
+          <select class="religiousOrganization-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Retail.png"class="category-imager"/>
+          <select class="retail-select"></select>
+        </div>
+
+      <div class="category">
+          <img src="./images/Travel.png"class="category-imager"/>
+          <select class="travel-select"></select>
+        </div>
+
+       
+
+        </div>
+      </div>
+
+      <div class="info-area">
+
 
         <div class="place-info" id="placeInfo">
           

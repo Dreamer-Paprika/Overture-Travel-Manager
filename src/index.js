@@ -135,8 +135,8 @@ const detailsArea = document.querySelector('.place-details');
 const placeTable = document.createElement('table');
 const placeTableHead = document.createElement('thead');
 placeTableHead.innerHTML = `<tr>
-<th style="color: #49e2e6; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Place Name</h3></th>
-<th style="color: #49e2e6; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Social Link</h3></th>
+<th style="color: #0F4C75; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Place Name</h3></th>
+<th style="color: #0F4C75; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Social Link</h3></th>
 </tr>`;
 const placeTableBody = document.createElement('tbody');
 const placeDetails = document.createElement('div');
@@ -291,8 +291,8 @@ function categoryEventListener(selector) {
       if (place.properties.socials[0]) {
         return `
       <tr>
-                    <td style="color: #0FA77A; text-align: left; border: 1px solid #ffff; max-width: 400px;">${place.properties.names.primary}</td>
-                    <td style="color: #0FA77A; text-align: left; border: 1px solid #ffff;"><a href=${place.properties.socials[0]} target='_'>CLICK HERE</a></td>
+                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff; max-width: 400px;">${place.properties.names.primary}</td>
+                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;"><a href=${place.properties.socials[0]} target='_'>CLICK HERE</a></td>
       </tr>
                   `;};
     }).join('');

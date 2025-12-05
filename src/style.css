@@ -36,7 +36,11 @@ body{
 .container {
   padding: 15px;
   margin: 0 auto;
-  width: 1200px;
+  width: 1250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .title{
@@ -158,7 +162,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -171,7 +175,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -184,7 +188,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -197,7 +201,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;    
 }
 
@@ -210,7 +214,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -223,7 +227,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -236,7 +240,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -249,7 +253,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -262,7 +266,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -275,7 +279,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -288,7 +292,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -301,7 +305,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369; 
 }
 
@@ -314,7 +318,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -327,7 +331,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -340,7 +344,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -353,7 +357,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;
 }
 
@@ -366,7 +370,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369; 
 }
 
@@ -379,7 +383,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369; 
 }
 
@@ -392,7 +396,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;   
 }
 
@@ -405,7 +409,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369; 
 }  
 
@@ -418,7 +422,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369; }
 
 .retail-select{
@@ -430,7 +434,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;  
 }
 
@@ -443,7 +447,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 background-color: #FFD369;    
 }
 
@@ -458,7 +462,7 @@ font-family: 'Comic Sans MS';
 width: 260px;
 height: 20px;
 border: 1px solid #ffff;
-color: #49e2e6;
+color: #0F4C75;
 }
 
 

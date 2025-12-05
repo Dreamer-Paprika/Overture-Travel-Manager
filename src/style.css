@@ -487,6 +487,7 @@ color: #49e2e6;
   font-weight: 700;
   color: #FFD369;
   text-shadow: 3px 3px 20px rgb(114, 17, 17), 5px 5px 5px #000000;
+  text-align: center;
 }
 
 .country-select-label{
@@ -578,9 +579,9 @@ align-items: center;
 margin-top: 10px;
 width: 1200px;
 height: 500px;
-border: 1px solid #721111;
+border: 3px solid #ffff;
 padding: 20px;
-background-color: #f1dbba;
+background-color: #49e2e6;
 margin: 20px auto;
 border-radius: 30px;
 }
@@ -593,13 +594,26 @@ border-radius: 30px;
   font-family: 'Sacramento';
   font-size: 35px;
   font-weight: 700;
-  color: rgb(114, 17, 17); 
+  color: #FFD369; 
+  text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;
+}
+
+.place-alt-link{
+  background-color: #FFD369;
+  color: #fff;
+  border: 1px solid #ffff;
+  padding: 20px;
+  border-radius: 20px;
+  text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;
+}
+
+.place-alt-link:hover{
+  background-color: #49e2e6;
+  color: #FFD369;
 }
 
 .place-table-wrapper{
  display: flex;
- flex-direction: column;
- gap:10px;
 justify-content: center;
 align-items: center;
 width: 100%;
@@ -611,18 +625,6 @@ color: #721111;
 }
 
 
-.place-alt-link{
-  background-color: rgb(240, 164, 65);
-  color: #721111;
-  border: 1px solid #721111;
-  padding: 20px;
-  border-radius: 20px;
-}
-
-.place-alt-link:hover{
-  background-color: #721111;
-  color: rgb(240, 164, 65);
-}
 
 .api-info{
   display: flex;

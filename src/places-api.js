@@ -1,6 +1,6 @@
-export function findPlaces(category, place) {
+export function findPlaces(category, country) {
   return fetch(
-    `https://api.overturemapsapi.com/places?country=${place}&categories=${category}`,
+    `https://api.overturemapsapi.com/places?country=${country}&categories=${category}`,
     {
       method: 'GET',
       headers: {

@@ -6,7 +6,7 @@ import { getImages } from './images-api.js';
 import Countries from './countries_sorted_alphabetical.json';
 
 
-import accomodationCategories from './accomodationCategories.json';
+import accommodationCategories from './accomodationCategories.json';
 import activeLifeCategories from './activeLife.json';
 import artsAndEntertainmentCategories from './artsAndEntertainment.json';
 import attractionsAndActivitiesCategories from './attractionsAndActivitiesCategories.json';
@@ -31,9 +31,9 @@ import Countries from './countries_sorted_alphabetical.json';
 
 
 
-const accomodationSelector = document.querySelector('.accomodation-select');
+const accommodationSelector = document.querySelector('.accomodation-select');
 const activeLifeSelector = document.querySelector('.activeLife-select');
-const artsAndEntertainmenSelector = document.querySelector('.artsAndEntertainment-select');
+const artsAndEntertainmentSelector = document.querySelector('.artsAndEntertainment-select');
 const attractionsAndActivitiesSelector = document.querySelector('.attractionsAndActivities-select');
 const automotiveSelector = document.querySelector('.automotive-select');
 const beautyAndSpaSelector = document.querySelector('.beautyAndSpa-select');
@@ -101,9 +101,9 @@ const countrySelector = document.querySelector('.country-select');
    
 renderCountryOptions(countrySelector, Countries, "Choose a country" );
 
-renderCategoryOptions(accomodationSelector, accomodationCategories, "Accomodation");
+renderCategoryOptions(accommodationSelector, accommodationCategories, "Accomodation");
 renderCategoryOptions(activeLifeSelector, activeLifeCategories, 'Active Life');
-renderCategoryOptions(artsAndEntertainmenSelector, artsAndEntertainmentCategories, 'Arts and Entertainment');
+renderCategoryOptions(artsAndEntertainmentSelector, artsAndEntertainmentCategories, 'Arts and Entertainment');
 renderCategoryOptions(attractionsAndActivitiesSelector, attractionsAndActivitiesCategories, 'Attraction and Activities');
 renderCategoryOptions(automotiveSelector, automotiveCategories, 'Automotive');
 renderCategoryOptions(beautyAndSpaSelector, beautyAndSpaCategories, 'Beauty and Spa');
@@ -131,16 +131,15 @@ renderCategoryOptions(travelSelector, travelCategories, 'Travel');
 
 const altLink = document.querySelector('.place-alt-link');
 const detailsArea = document.querySelector('.place-details');
-const placeSelector = document.createElement('select');
-placeSelector.style.display = 'none';
 
 const placeTable = document.createElement('table');
 const placeTableHead = document.createElement('thead');
 placeTableHead.innerHTML = `<tr>
-<th style="color: #8B0000; text-align: center; border: 1px solid #8B0000; font-weight: 700;"><h3>Place Name</h3></th>
-<th style="color: #8B0000; text-align: center; border: 1px solid #8B0000; font-weight: 700;"><h3>Social Link</h3></th>
+<th style="color: #49e2e6; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Place Name</h3></th>
+<th style="color: #49e2e6; text-align: center; border: 1px solid #ffff; font-weight: 700;"><h3>Social Link</h3></th>
 </tr>`;
 const placeTableBody = document.createElement('tbody');
+const placeDetails = document.createElement('div');
 
 placeTable.style.display = 'none';
 
@@ -149,10 +148,12 @@ const innerContr = document.querySelector('.pet-bio');
 
 const placeInnerContr = document.querySelector('.place-table-wrapper');
 
-placeInnerContr.append(placeSelector);
+
 placeInnerContr.append(placeTable);
 placeTable.append(placeTableHead);
 placeTable.append(placeTableBody);
+placeInnerContr.append(placeDetails);
+
 
 let dogBreeds;
 let selectedPlace;
@@ -236,6 +237,110 @@ const keyValue = document.querySelector('.keyValue');
 const imageGallery = document.querySelector('.image-gallery');
 
 const apiDetailsArea = document.querySelector('.api-details');
+
+let selectedCountry = null;
+
+countrySelector.addEventListener('change', event => {
+  selectedCountry = event.target.value;
+  console.log(selectedCountry);
+});
+
+function categoryEventListener(selector) {
+  
+  selector.addEventListener('change', event => {
+    if (selectedCountry === null) {
+      Notiflix.Notify.failure('Choose a country first');
+      event.target.value = '';
+      return;
+    }
+    detailsArea.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start', // or 'center', 'end', 'nearest'
+    });
+    console.log('click');
+    Notiflix.Loading.hourglass('Loading data, please wait...');
+    findPlaces(event.target.value, selectedCountry)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+    Notiflix.Loading.remove();
+        //console.log(res);
+    altLink.style.display = 'none';
+    detailsArea.style.height = "fit-content";
+    placeTable.style.display = 'block';
+        placeTable.style.borderCollapse = 'collapse';
+        placeTable.style.border = '3px solid #ffff';
+        placeTable.style.padding = '10px';
+        placeTable.style.borderRadius = '10px';
+        placeTable.style.backgroundColor = '#FFD369';
+        placeTable.style.color = '#49e2e6';
+        placeInnerContr.style.alignItems = 'start';
+        placeInnerContr.style.justifyContent = 'space-between';
+        placeTable.style.height = '300px';
+        placeTable.style.overflowX = 'auto';
+        placeTable.style.overflowY = 'auto';
+        placeDetails.style.width = '100px';
+        placeDetails.style.height = '100px';
+        placeDetails.style.backgroundColor = '#ffff';
+        
+    const foundPlaces = res.map((place) => {
+      if (place.properties.socials[0]) {
+        return `
+      <tr>
+                    <td style="color: #0FA77A; text-align: left; border: 1px solid #ffff; max-width: 400px;">${place.properties.names.primary}</td>
+                    <td style="color: #0FA77A; text-align: left; border: 1px solid #ffff;"><a href=${place.properties.socials[0]} target='_'>CLICK HERE</a></td>
+      </tr>
+                  `;};
+    }).join('');
+    if (foundPlaces.length !== 0) {
+      placeTableBody.innerHTML = foundPlaces;
+    }
+    else {
+      placeTableBody.innerHTML = `<tr>
+                                  <td style="color: #49e2e6; text-align: center; border: 1px solid #ffff;">Null</td>
+                                  <td style="color: #49e2e6; text-align: center; border: 1px solid #ffff;">Null</td>
+                                  </tr>
+      `;
+    }
+  })
+      .catch(error => {
+        //loaderMsg.classList.add('hide');
+        //errorMsg.classList.remove('hide');
+        Notiflix.Loading.remove();
+        Notiflix.Notify.failure(
+          'Oops! Something went wrong! Try reloading the page!'
+        );
+
+        console.error(`Error message ${error}`);
+      });
+  });
+}
+
+categoryEventListener(accommodationSelector);
+categoryEventListener(activeLifeSelector);
+categoryEventListener(artsAndEntertainmentSelector);
+categoryEventListener(attractionsAndActivitiesSelector);
+categoryEventListener(automotiveSelector);
+categoryEventListener(beautyAndSpaSelector);
+categoryEventListener(businessToBusinessSelector);
+categoryEventListener(eatAndDrinkSelector);
+categoryEventListener(educationSelector);
+categoryEventListener(financialServiceSelector);
+categoryEventListener(healthAndMedicalSelector);
+categoryEventListener(homeServiceSelector);
+categoryEventListener(massMediaSelector);
+categoryEventListener(petSelector);
+categoryEventListener(privateCorporationsSelector);
+categoryEventListener(professionalServicesSelector);
+categoryEventListener(publicServiceAndGovernmentSelector);
+categoryEventListener(realEstateSelector);
+categoryEventListener(religiousOrganizationSelector);
+categoryEventListener(retailSelector);
+categoryEventListener(travelSelector);
 
 apiGenTableButton.addEventListener("click", async () => {
   if ((keyName.value.trim() === "" || keyId.value.trim() === "" || keyMetaData.value.trim() === "")) {

@@ -2,6 +2,7 @@ import Notiflix from 'notiflix';
 import { findPlaces } from './places-api.js';
 import { createApiKey } from './theauthapi.js';
 import { getImages } from './images-api.js';
+import { findFlag } from './country-flag.js';
 
 import Countries from './countries_sorted_alphabetical.json';
 
@@ -142,6 +143,7 @@ const placeTableBody = document.createElement('tbody');
 const placeDetails = document.createElement('div');
 
 placeTable.style.display = 'none';
+placeDetails.style.display = 'none';
 
 
 const innerContr = document.querySelector('.pet-bio');
@@ -153,6 +155,10 @@ placeInnerContr.append(placeTable);
 placeTable.append(placeTableHead);
 placeTable.append(placeTableBody);
 placeInnerContr.append(placeDetails);
+
+placeDetails.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height:100%;">
+<div style="background-color: #49e2e6; color: #ffff; border: 1px solid #ffff; padding: 30px; border-radius: 10px; text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;">Click on a Place Name</div>
+</div>`;
 
 
 let dogBreeds;
@@ -240,9 +246,125 @@ const apiDetailsArea = document.querySelector('.api-details');
 
 let selectedCountry = null;
 
+let placesArray;
+
+let myPlaceObj;
+
+let countryFlag;
+
+window.selectPlace = (event) => {
+  
+  const id = event.currentTarget.getAttribute('data-id');
+  myPlaceObj = placesArray.find(place => place.id === id);
+  const mySelectedCountry = Countries.find(country => country.alpha_2 === selectedCountry);
+  console.log(myPlaceObj);
+  placeDetails.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; border-radius: 30px; border: 1px solid #0F4C75; padding: 20px; ">
+                         
+                         <div style="display: flex; flex-direction: column; gap:15px; align-items: center; ">
+                         
+                         <table style="border-collapse: collapse; width: 500px;">
+
+                         <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Place Name:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">  ${
+                          myPlaceObj?.properties?.names?.primary ?? 'Unknown'
+                        }</td>
+                        </tr>
+
+                        <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Freeform:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          myPlaceObj.properties.addresses[0].freeform
+                            ? myPlaceObj.properties.addresses[0].freeform
+                            : 'Null'
+                        }</td>
+                        </tr>
+
+                          <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Locality:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          myPlaceObj.properties.addresses[0].locality
+                            ? myPlaceObj.properties.addresses[0].locality
+                            : 'Null'
+                        }</td>
+                        </tr>
+
+                         <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Postal Code:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          myPlaceObj.properties.addresses[0].postcode
+                            ? myPlaceObj.properties.addresses[0].postcode
+                            : 'Null'
+                        }</td>
+                        </tr>
+
+                          <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Reigon:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          myPlaceObj.properties.addresses[0].region
+                            ? myPlaceObj.properties.addresses[0].region
+                            : 'Null'
+                        }</td>
+                        </tr>
+
+                          <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Country:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          mySelectedCountry.name
+                        }</td>
+                        </tr>
+
+                         </table>
+
+
+                         <button style="padding: 10px 5px; background-color: rgb(240, 164, 65); border-radius: 20px; font-family: Comic Sans MS; font-weight: 700; border: 1px solid #8B0000; color: #8B0000;"><a href="#placeInfo">Find information on ${
+                           mySelectedCountry.name
+                         }  </a></button>
+                         
+                         
+                         </div>
+
+                          <div style="border: 1px solid #8B0000;"><img src="${
+                            countryFlag.rectangle_image_url
+                          }" alt="Picture of Cat" style="height: 200px"></div>
+                         </div>
+                         </div>
+                         </div>`;
+}
+
 countrySelector.addEventListener('change', event => {
   selectedCountry = event.target.value;
   console.log(selectedCountry);
+  placeTable.style.display = 'none';
+  placeDetails.style.display = 'none';
+  altLink.style.display = 'block';
+  detailsArea.style.height = '500px';
+  placeInnerContr.style.alignItems = "center";
+  placeInnerContr.style.justifyContent = 'center';
+  placeDetails.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height:100%;">
+<div style="background-color: #49e2e6; color: #ffff; border: 1px solid #ffff; padding: 30px; border-radius: 10px; text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;">Click on a Place Name</div>
+</div>`;
+  Notiflix.Loading.hourglass('Fetching country Information...');
+  findFlag(selectedCountry)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(res => {
+      Notiflix.Loading.remove();
+      console.log(res);
+      countryFlag = res;
+    })
+    .catch(error => {
+      Notiflix.Loading.remove();
+      Notiflix.Notify.failure(
+        'Cannot find info on Country'
+      );
+      event.target.value="";
+      console.error(`Error message ${error}`);
+    });
 });
 
 function categoryEventListener(selector) {
@@ -267,6 +389,7 @@ function categoryEventListener(selector) {
         return res.json();
       })
       .then((res) => {
+        placesArray = res;
     Notiflix.Loading.remove();
         //console.log(res);
     altLink.style.display = 'none';
@@ -278,26 +401,41 @@ function categoryEventListener(selector) {
         placeTable.style.borderRadius = '10px';
         placeTable.style.backgroundColor = '#FFD369';
         placeTable.style.color = '#49e2e6';
+        placeTable.style.color = '535px';
         placeInnerContr.style.alignItems = 'start';
         placeInnerContr.style.justifyContent = 'space-between';
         placeTable.style.height = '300px';
         placeTable.style.overflowX = 'auto';
         placeTable.style.overflowY = 'auto';
-        placeDetails.style.width = '100px';
-        placeDetails.style.height = '100px';
-        placeDetails.style.backgroundColor = '#ffff';
+        placeTable.style.boxShadow = '0 4px 6px -1px #0000004d, 0 2px 4px -1px #0003, 0 10px 12px -6px #0006';
+        placeDetails.style.display = 'block';
+        placeDetails.style.width = '600px';
+        placeDetails.style.height = '300px';
+        placeDetails.style.overflowX = 'auto';
+        placeDetails.style.overflowY = 'auto';
+        placeDetails.style.borderRadius = '10px';
+        placeDetails.style.border = '3px solid #ffff';
+        placeDetails.style.backgroundColor = '#FFD369';
+         placeDetails.style.boxShadow = 'rgba(0, 0, 0, 0.3) 0px 4px 6px -1px, rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.4) 0px 10px 12px -6px';
+        event.target.value = '';
+        //placeDetails.innerHTML = placeDetailsElements;
+        
         
     const foundPlaces = res.map((place) => {
       if (place.properties.socials[0]) {
         return `
       <tr>
-                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff; max-width: 400px;">${place.properties.names.primary}</td>
-                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;"><a href=${place.properties.socials[0]} target='_'>CLICK HERE</a></td>
+                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff; max-width: 400px; cursor: pointer;" onmouseover="this.style.background='#49e2e6';"
+  onmouseout="this.style.background='#FFD369';" data-id="${place.id}" onclick="selectPlace(event)">${place.properties.names.primary}</td>
+  
+                    <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;"><a href="${place.properties.socials[0]}" target='_blank'>CLICK HERE</a></td>
       </tr>
                   `;};
     }).join('');
     if (foundPlaces.length !== 0) {
       placeTableBody.innerHTML = foundPlaces;
+
+      
     }
     else {
       placeTableBody.innerHTML = `<tr>
@@ -314,11 +452,15 @@ function categoryEventListener(selector) {
         Notiflix.Notify.failure(
           'Oops! Something went wrong! Try reloading the page!'
         );
-
+        event.target.value = '';
         console.error(`Error message ${error}`);
       });
   });
 }
+
+
+
+
 
 categoryEventListener(accommodationSelector);
 categoryEventListener(activeLifeSelector);

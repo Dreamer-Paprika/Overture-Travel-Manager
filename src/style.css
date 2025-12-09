@@ -139,6 +139,19 @@ display: flex;
   border-radius: 4px;
 }
 
+.middle-area{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.topCountryFlagWrapper{
+ display: none;
+  border: 1px solid #ffff;
+  margin: 10px; 
+}
+
 .country-category{
    margin: 8px;
 display: flex;
@@ -618,6 +631,7 @@ border-radius: 30px;
 
 .place-table-wrapper{
  display: flex;
+ flex-direction: column;
 justify-content: center;
 align-items: center;
 width: 100%;
@@ -625,8 +639,14 @@ height: 100%;
 font-family: 'Comic Sans MS';
 font-size: 15px;
 font-weight: 700;
-color: #721111;
 }
+
+.countryFlagWrapper{
+  display: none;
+  border: 1px solid #ffff;
+  margin: 10px;
+}
+
 
 
 

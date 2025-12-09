@@ -3,6 +3,7 @@ import { findPlaces } from './places-api.js';
 import { createApiKey } from './theauthapi.js';
 import { getImages } from './images-api.js';
 import { findFlag } from './country-flag.js';
+import { findInfo } from './country-info.js';
 
 import Countries from './countries_sorted_alphabetical.json';
 
@@ -31,7 +32,8 @@ import travelCategories from './travel.json';
 import Countries from './countries_sorted_alphabetical.json';
 
 
-
+const countryFlagImageWrapper = document.querySelector('.countryFlagWrapper');
+const topCountryFlagImageWrapper = document.querySelector('.topCountryFlagWrapper');
 const accommodationSelector = document.querySelector('.accomodation-select');
 const activeLifeSelector = document.querySelector('.activeLife-select');
 const artsAndEntertainmentSelector = document.querySelector('.artsAndEntertainment-select');
@@ -63,8 +65,8 @@ const countrySelector = document.querySelector('.country-select');
     //selector.innerHTML = '';
 
     const placeholder = document.createElement('option');
-    const navLink = document.createElement('a');
-    navLink.setAttribute('href', '#placeInfo');
+    //const navLink = document.createElement('a');
+    //navLink.setAttribute('href', '#placeInfo');
     placeholder.setAttribute('disabled', '');
     placeholder.setAttribute('selected', 'selected');
     placeholder.setAttribute('value', '');
@@ -80,7 +82,8 @@ const countrySelector = document.querySelector('.country-select');
       selector.append(option);
     });
 }
-   function renderCountryOptions(selector, countries, Instruction) {
+
+  function renderCountryOptions(selector, countries, Instruction) {
      //selector.innerHTML = '';
 
      const placeholder = document.createElement('option');
@@ -133,6 +136,7 @@ renderCategoryOptions(travelSelector, travelCategories, 'Travel');
 const altLink = document.querySelector('.place-alt-link');
 const detailsArea = document.querySelector('.place-details');
 
+const placeArea = document.createElement('div');
 const placeTable = document.createElement('table');
 const placeTableHead = document.createElement('thead');
 placeTableHead.innerHTML = `<tr>
@@ -142,6 +146,10 @@ placeTableHead.innerHTML = `<tr>
 const placeTableBody = document.createElement('tbody');
 const placeDetails = document.createElement('div');
 
+placeArea.style.display = 'none';
+placeArea.style.width = '100%';
+placeArea.style.height = '100%';
+
 placeTable.style.display = 'none';
 placeDetails.style.display = 'none';
 
@@ -150,11 +158,11 @@ const innerContr = document.querySelector('.pet-bio');
 
 const placeInnerContr = document.querySelector('.place-table-wrapper');
 
-
-placeInnerContr.append(placeTable);
+placeInnerContr.append(placeArea);
+placeArea.append(placeTable);
 placeTable.append(placeTableHead);
 placeTable.append(placeTableBody);
-placeInnerContr.append(placeDetails);
+placeArea.append(placeDetails);
 
 placeDetails.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height:100%;">
 <div style="background-color: #49e2e6; color: #ffff; border: 1px solid #ffff; padding: 30px; border-radius: 10px; text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;">Click on a Place Name</div>
@@ -246,6 +254,8 @@ const apiDetailsArea = document.querySelector('.api-details');
 
 let selectedCountry = null;
 
+let selectedCountryName = null;
+
 let placesArray;
 
 let myPlaceObj;
@@ -315,28 +325,25 @@ window.selectPlace = (event) => {
                         </tr>
 
                          </table>
-
-
-                         <button style="padding: 10px 5px; background-color: rgb(240, 164, 65); border-radius: 20px; font-family: Comic Sans MS; font-weight: 700; border: 1px solid #8B0000; color: #8B0000;"><a href="#placeInfo">Find information on ${
-                           mySelectedCountry.name
-                         }  </a></button>
                          
                          
                          </div>
 
-                          <div style="border: 1px solid #8B0000;"><img src="${
-                            countryFlag.rectangle_image_url
-                          }" alt="Picture of Cat" style="height: 200px"></div>
+                      
                          </div>
                          </div>
                          </div>`;
 }
 
 countrySelector.addEventListener('change', event => {
+  const countryName = Countries.find((country) => {return event.target.value === country.alpha_2});
   selectedCountry = event.target.value;
   console.log(selectedCountry);
+  countryFlagImageWrapper.style.display = 'block';
+  topCountryFlagImageWrapper.style.display = 'block';
   placeTable.style.display = 'none';
   placeDetails.style.display = 'none';
+  placeArea.style.display = 'none';
   altLink.style.display = 'block';
   detailsArea.style.height = '500px';
   placeInnerContr.style.alignItems = "center";
@@ -356,6 +363,9 @@ countrySelector.addEventListener('change', event => {
       Notiflix.Loading.remove();
       console.log(res);
       countryFlag = res;
+      countryFlagImageWrapper.innerHTML = `<img src="${countryFlag.rectangle_image_url}" alt='Country flag' style="height: 200px">`;
+      topCountryFlagImageWrapper.innerHTML = `<img src="${countryFlag.rectangle_image_url}" alt='Country flag' style="height: 200px">`;
+      Notiflix.Notify.success('Country Information retreived');
     })
     .catch(error => {
       Notiflix.Loading.remove();
@@ -392,6 +402,7 @@ function categoryEventListener(selector) {
         placesArray = res;
     Notiflix.Loading.remove();
         //console.log(res);
+        placeArea.style.display = 'flex';
     altLink.style.display = 'none';
     detailsArea.style.height = "fit-content";
     placeTable.style.display = 'block';
@@ -402,8 +413,8 @@ function categoryEventListener(selector) {
         placeTable.style.backgroundColor = '#FFD369';
         placeTable.style.color = '#49e2e6';
         placeTable.style.color = '535px';
-        placeInnerContr.style.alignItems = 'start';
-        placeInnerContr.style.justifyContent = 'space-between';
+        placeArea.style.alignItems = 'start';
+        placeArea.style.justifyContent = 'space-between';
         placeTable.style.height = '300px';
         placeTable.style.overflowX = 'auto';
         placeTable.style.overflowY = 'auto';

@@ -4,6 +4,8 @@ import { createApiKey } from './theauthapi.js';
 import { getImages } from './images-api.js';
 import { findFlag } from './country-flag.js';
 import { findInfo } from './country-info.js';
+import { fetchCatBreeds } from './cat-api.js';
+import { fetchDogBreeds } from './dog-api.js';
 
 import Countries from './countries_sorted_alphabetical.json';
 
@@ -154,8 +156,6 @@ placeTable.style.display = 'none';
 placeDetails.style.display = 'none';
 
 
-const innerContr = document.querySelector('.pet-bio');
-
 const placeInnerContr = document.querySelector('.place-table-wrapper');
 
 placeInnerContr.append(placeArea);
@@ -170,6 +170,7 @@ placeDetails.innerHTML = `<div style="display: flex; align-items: center; justif
 
 
 let dogBreeds;
+let catBreeds;
 let selectedPlace;
 
 const apiGenTable = document.querySelector('.api-gen-table-wrapper');
@@ -262,6 +263,16 @@ let myPlaceObj;
 
 let countryFlag;
 
+let countryDogBreeds;
+
+let countryCatBreeds;
+
+let countryDogBreedsElement;
+
+let countryCatBreedsElement;
+
+let allPetBreeds;
+
 window.selectPlace = (event) => {
   
   const id = event.currentTarget.getAttribute('data-id');
@@ -278,6 +289,15 @@ window.selectPlace = (event) => {
                         <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Place Name:</h3></th>
                         <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">  ${
                           myPlaceObj?.properties?.names?.primary ?? 'Unknown'
+                        }</td>
+                        </tr>
+
+                           <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Category:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          myPlaceObj.properties.addresses[0].freeform
+                            ? myPlaceObj.properties.categories.primary
+                            : 'Null'
                         }</td>
                         </tr>
 
@@ -324,6 +344,15 @@ window.selectPlace = (event) => {
                         }</td>
                         </tr>
 
+                           <tr>
+                        <th style="color: #0F4C75; text-align: left; border: 1px solid #ffff; font-weight: 700; width:120px;"><h3>Breeds:</h3></th>
+                        <td style="color: #0F4C75; text-align: left; border: 1px solid #ffff;">${
+                          allPetBreeds != 0 ? allPetBreeds.join(', ') : 'Null'
+                        }</td>
+                        </tr>
+
+            
+
                          </table>
                          
                          
@@ -336,7 +365,16 @@ window.selectPlace = (event) => {
 }
 
 countrySelector.addEventListener('change', event => {
-  const countryName = Countries.find((country) => {return event.target.value === country.alpha_2});
+  countryDogBreeds = [];
+
+  countryCatBreeds = [];
+
+  countryDogBreedsElement = [];
+
+  countryCatBreedsElement = [];
+
+  allPetBreeds = [];
+  //const countryName = Countries.find((country) => {return event.target.value === country.alpha_2});
   selectedCountry = event.target.value;
   console.log(selectedCountry);
   countryFlagImageWrapper.style.display = 'block';
@@ -360,7 +398,7 @@ countrySelector.addEventListener('change', event => {
       return res.json();
     })
     .then(res => {
-      Notiflix.Loading.remove();
+      
       console.log(res);
       countryFlag = res;
       countryFlagImageWrapper.innerHTML = `<img src="${countryFlag.rectangle_image_url}" alt='Country flag' style="height: 200px">`;
@@ -375,7 +413,86 @@ countrySelector.addEventListener('change', event => {
       event.target.value="";
       console.error(`Error message ${error}`);
     });
-});
+
+  
+   fetchDogBreeds()
+     .then(response => {
+       if (!response.ok) {
+         throw new Error(`HTTP error! Status: ${response.status}`);
+       }
+
+       return response.json();
+     })
+     .then(users => {
+       //Notiflix.Loading.remove();
+       dogBreeds = users;
+       console.log(dogBreeds);
+
+       countryDogBreeds = dogBreeds.filter(
+         breed => breed.country_code === selectedCountry
+       );
+
+       countryDogBreedsElement = countryDogBreeds.map(breed => {
+         return `<span>${breed.name}</span>`;
+       });
+
+       console.log(countryDogBreedsElement.join(', '));
+
+       /*countryBreeds = dogBreeds.filter(breed => {
+         if (breed.country_code === selectedCountry) {
+           console.log(breed.name);
+           return;
+         }*/
+       //console.log(countryBreeds.name.join(','));
+     })
+     .catch(error => {
+       Notiflix.Loading.remove();
+       Notiflix.Notify.failure('Cannot find Dog Breeds!');
+
+       console.error(`Error message ${error}`);
+     });
+
+     fetchCatBreeds()
+       .then(response => {
+         if (!response.ok) {
+           throw new Error(`HTTP error! Status: ${response.status}`);
+         }
+         const str = response.json();
+         //console.log(str);
+         return str;
+       })
+       .then(users => {
+         Notiflix.Loading.remove();
+         catBreeds = users;
+         console.log(catBreeds);
+
+         countryCatBreeds = catBreeds.filter(
+           breed => breed.country_code === selectedCountry
+         );
+
+         countryCatBreedsElement = countryCatBreeds.map((breed) => {
+           return `<span>${breed.name}</span>`;
+         });
+
+         console.log(countryCatBreedsElement.join(', '));
+
+         allPetBreeds = [...countryCatBreedsElement, ...countryDogBreedsElement];
+
+         console.log(allPetBreeds);
+       })
+       .catch(error => {
+         Notiflix.Loading.remove();
+         Notiflix.Notify.failure(
+           'Cannot find Cat Breeds!'
+         );
+
+         console.error(`Error message ${error}`);
+       });
+       
+     })
+
+   
+  
 
 function categoryEventListener(selector) {
   

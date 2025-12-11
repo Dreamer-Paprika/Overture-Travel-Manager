@@ -570,7 +570,7 @@ text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;
 }
 
 .nav-item:hover{
-  background-color:#49e2e6;
+  background-color:rgb(15, 76, 117);
   color: #FFD369;
 }
 
@@ -625,7 +625,7 @@ border-radius: 30px;
 }
 
 .place-alt-link:hover{
-  background-color: #49e2e6;
+  background-color: rgb(15, 76, 117);
   color: #FFD369;
 }
 
@@ -662,19 +662,21 @@ flex-direction: column;
 align-items: center;
 margin-top: 10px;
 width: 1200px;
-height: 500px;
-border: 1px solid #721111;
+height: 600px;
+border: 3px solid #ffff;
 padding: 20px;
-background-color: #f1dbba;
+background-color: #49e2e6;
 margin: 20px auto;
 border-radius: 30px;
 }
 
 .api-info-title{
-  font-family: 'Sacramento';
-  font-size: 35px;
-  font-weight: 700;
-  color: rgb(114, 17, 17); 
+      color: #ffd369;
+    text-shadow: 3px 3px 20px #721111, 5px 5px 5px #000;
+    font-family: 'Sacramento';
+    font-size: 35px;
+    font-weight: 700;
+    padding: 10px;
 }
 
 .api-table-wrapper{
@@ -697,7 +699,25 @@ color: #721111;
  gap:10px;
 justify-content: center;
 align-items: center;
+
 }
+
+.api-gen-table{
+  background-color: #ffd369;
+  border: 1px solid #ffff;
+}
+
+.api-gen-table-wrapper-button{
+  color: rgb(15, 76, 117);
+  background-color: #ffd369; 
+}
+
+.api-gen-table-wrapper-button:hover{
+  background-color: rgb(15, 76, 117);
+  color: #ffd369;
+}
+
+
 
 .api-view-table-wrapper{
   display: flex;
@@ -713,6 +733,16 @@ align-items: center;
  gap:10px;
 justify-content: center;
 align-items: center;
+}
+
+.api-use-table-wrapper-button{
+    color: rgb(15, 76, 117);
+  background-color: #ffd369; 
+}
+
+.api-use-table-wrapper-button:hover{
+    background-color: rgb(15, 76, 117);
+  color: #ffd369;
 }
 
 .image-gallery-wrapper{

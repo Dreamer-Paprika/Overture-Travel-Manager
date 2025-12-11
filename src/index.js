@@ -202,29 +202,29 @@ const keySideEffects = () => {
     const createdDate = formatter.format(myDate);
 
     apiViewTable.innerHTML = `
-     <table class="api-view-table" style="border-collapse: collapse;">
-              <caption style="color: #8B0000; border: 1px solid #8B0000; font-weight: 700; font-size: 20px;">View your API Details</caption>
+     <table class="api-view-table" style="border-collapse: collapse; background-color: #ffd369; border: 1px solid #ffff;">
+              <caption style="color: rgb(15, 76, 117); font-family: Sacramento; background-color: #ffd369; font-size: 35px; border: 1px solid #ffff; font-weight: 700;">View your API Details</caption>
               <tr>
-                <th style="color: #8B0000; text-align: left; border: 1px solid #8B0000; font-weight: 700;">API KEY NAME:</th>
-                <td style="color: #8B0000; text-align: left; border: 1px solid #8B0000;">${keyDetails.name}</td>
+                <th style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff; font-weight: 700;">API KEY NAME:</th>
+                <td style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff;">${keyDetails.name}</td>
               </tr>
               <tr>
-                <th style="color: #8B0000; text-align: left; border: 1px solid #8B0000; font-weight: 700;">API KEY:</th>
-                <td style="color: #8B0000; text-align: left; border: 1px solid #8B0000;">${keyDetails.key}</td>
+                <th style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff; font-weight: 700;">API KEY:</th>
+                <td style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff;">${keyDetails.key}</td>
               </tr>
               <tr>
-                <th style="color: #8B0000; text-align: left; border: 1px solid #8B0000; font-weight: 700;">CUSTOM ACCOUNT ID:</th>
-                <td style="color: #8B0000; text-align: left; border: 1px solid #8B0000;">${keyDetails.customAccountId}</td>
-              </tr>
-
-              <tr>
-                <th style="color: #8B0000; text-align: left; border: 1px solid #8B0000; font-weight: 700;">CUSTOM METADATA:</th>
-                <td style="color: #8B0000; text-align: left; border: 1px solid #8B0000;">${keyDetails.customMetaData.metadata_val}</td>
+                <th style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff; font-weight: 700;">CUSTOM ACCOUNT ID:</th>
+                <td style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff;">${keyDetails.customAccountId}</td>
               </tr>
 
               <tr>
-                <th style="color: #8B0000; text-align: left; border: 1px solid #8B0000; font-weight: 700;">CREATED AT:</th>
-                <td style="color: #8B0000; text-align: left; border: 1px solid #8B0000;">${createdDate}</td>
+                <th style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff; font-weight: 700;">CUSTOM METADATA:</th>
+                <td style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff;">${keyDetails.customMetaData.metadata_val}</td>
+              </tr>
+
+              <tr>
+                <th style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff; font-weight: 700;">CREATED AT:</th>
+                <td style="color: rgb(15, 76, 117); text-align: left; border: 1px solid #ffff;">${createdDate}</td>
               </tr>
             </table>
   `;

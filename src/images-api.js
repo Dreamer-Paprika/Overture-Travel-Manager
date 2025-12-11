@@ -1,5 +1,5 @@
 export async function getImages(apiKey) {
-  const url = 'https://pet2place-backend.onrender.com/api/images/getImages';
+  const url = 'https://overture-travel-manager-backend.onrender.com/api/images/getImages';
   const options = {
     method: 'GET',
     headers: {

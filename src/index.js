@@ -278,7 +278,7 @@ window.selectPlace = (event) => {
   const id = event.currentTarget.getAttribute('data-id');
   myPlaceObj = placesArray.find(place => place.id === id);
   const mySelectedCountry = Countries.find(country => country.alpha_2 === selectedCountry);
-  console.log(myPlaceObj);
+  //console.log(myPlaceObj);
   placeDetails.innerHTML = `<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; border-radius: 30px; border: 1px solid #0F4C75; padding: 20px; ">
                          
                          <div style="display: flex; flex-direction: column; gap:15px; align-items: center; ">
@@ -376,7 +376,7 @@ countrySelector.addEventListener('change', event => {
   allPetBreeds = [];
   //const countryName = Countries.find((country) => {return event.target.value === country.alpha_2});
   selectedCountry = event.target.value;
-  console.log(selectedCountry);
+  //console.log(selectedCountry);
   countryFlagImageWrapper.style.display = 'block';
   topCountryFlagImageWrapper.style.display = 'block';
   placeTable.style.display = 'none';
@@ -399,7 +399,7 @@ countrySelector.addEventListener('change', event => {
     })
     .then(res => {
       
-      console.log(res);
+      //console.log(res);
       countryFlag = res;
       countryFlagImageWrapper.innerHTML = `<img src="${countryFlag.rectangle_image_url}" alt='Country flag' style="height: 200px">`;
       topCountryFlagImageWrapper.innerHTML = `<img src="${countryFlag.rectangle_image_url}" alt='Country flag' style="height: 200px">`;
@@ -426,7 +426,7 @@ countrySelector.addEventListener('change', event => {
      .then(users => {
        //Notiflix.Loading.remove();
        dogBreeds = users;
-       console.log(dogBreeds);
+       //console.log(dogBreeds);
 
        countryDogBreeds = dogBreeds.filter(
          breed => breed.country_code === selectedCountry
@@ -436,7 +436,7 @@ countrySelector.addEventListener('change', event => {
          return `<span>${breed.name}</span>`;
        });
 
-       console.log(countryDogBreedsElement.join(', '));
+       //console.log(countryDogBreedsElement.join(', '));
 
        /*countryBreeds = dogBreeds.filter(breed => {
          if (breed.country_code === selectedCountry) {
@@ -464,7 +464,7 @@ countrySelector.addEventListener('change', event => {
        .then(users => {
          Notiflix.Loading.remove();
          catBreeds = users;
-         console.log(catBreeds);
+         //console.log(catBreeds);
 
          countryCatBreeds = catBreeds.filter(
            breed => breed.country_code === selectedCountry
@@ -474,11 +474,11 @@ countrySelector.addEventListener('change', event => {
            return `<span>${breed.name}</span>`;
          });
 
-         console.log(countryCatBreedsElement.join(', '));
+         //console.log(countryCatBreedsElement.join(', '));
 
          allPetBreeds = [...countryCatBreedsElement, ...countryDogBreedsElement];
 
-         console.log(allPetBreeds);
+         //console.log(allPetBreeds);
        })
        .catch(error => {
          Notiflix.Loading.remove();
@@ -506,7 +506,7 @@ function categoryEventListener(selector) {
       behavior: 'smooth',
       block: 'start', // or 'center', 'end', 'nearest'
     });
-    console.log('click');
+    //console.log('click');
     Notiflix.Loading.hourglass('Loading data, please wait...');
     findPlaces(event.target.value, selectedCountry)
       .then(res => {
@@ -650,12 +650,13 @@ apiUseTableButton.addEventListener("click", async() => {
     const myImages = Images
       .map(Image => {
         return `
-        <li><img src=${Image.link} style="width: 200px; height: 200px; border: 1px solid #721111;"/></li>
+        <li style="width: 370px; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #ffd369; color: rgb(15, 76, 117); padding: 10px; border: 1px solid #ffff; border-radius: 10px;"><img src=${Image.link} style="width: 300px; height: 300px; border: 1px solid #ffff;"/> 
+        <span>${Image.name}</span></li>
         `;
       })
      .join('');
    
-   imageGallery.style.border = '1px solid #721111';
+   imageGallery.style.border = '1px solid #ffff';
    imageGallery.style.padding = '20px';
    imageGallery.style.borderRadius = '20px';
    imageGallery.innerHTML = myImages;

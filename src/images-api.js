@@ -1,5 +1,6 @@
 export async function getImages(apiKey) {
-  const url = 'https://overture-travel-manager-backend.onrender.com/api/images/getImages';
+  const url =
+    'https://overture-travel-manager-backend-vwxx.onrender.com/api/images/getImages';
   const options = {
     method: 'GET',
     headers: {
